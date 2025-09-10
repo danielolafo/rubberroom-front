@@ -31,7 +31,11 @@ function MainDashboard() {
 
     useEffect(() => {
         get_allocations();
-    }, [])
+    }, []);
+
+    const handleReserve=()=>{
+        console.log('Handle reserve');
+    }
 
 
     return (
@@ -47,11 +51,19 @@ function MainDashboard() {
                 </thead>
                 <tbody>
                     {allocations.map((row, index) => (
-                        <tr>
+                        <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{row.city}</td>
                             <td>{row.address}</td>
-                            <td><button>Reserve</button></td>
+                            <td>
+                                <button style={{width:'30px'}} onClick={handleReserve}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
+                                strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" 
+                                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -61,6 +73,26 @@ function MainDashboard() {
                 No data found
             </div>
     );
+}
+
+function ReserveButton({allocation}){
+    const handleReserve=()=>{
+        console.log('Handle reserve');
+    }
+
+        if(allocation.state=='A'){
+            return
+            <button style={{width:'30px'}} onClick={handleReserve}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
+            strokeWidth={1.5} stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round" 
+                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            </button>
+        }else{
+            return <></>
+        }
+
 }
 
 export default Dashboard;
