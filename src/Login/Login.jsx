@@ -5,6 +5,7 @@ function Login(){
 
     const defaultUsername = 'user';
     const defaultPassword = 'pass';
+    const defaultToken = 'Bearer tok';
 
     const navigate = useNavigate();
 
@@ -18,10 +19,8 @@ function Login(){
     const handleSubmit=(event)=>{
         event.preventDefault();
         
-        console.log('Username ',formValues.username);
-        console.log('Password ',formValues.password);
         if(formValues.username==defaultUsername && formValues.password==defaultPassword){
-            console.log('Access granted');
+            sessionStorage.setItem('token', defaultToken);
             navigate('/');
         }
     }
