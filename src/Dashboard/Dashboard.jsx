@@ -83,7 +83,7 @@ function ReserveButton({allocation}){
             </button>
         </>
     } else {
-        return <>+</>
+        return <></>
     }
 
 }
