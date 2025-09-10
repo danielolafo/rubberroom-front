@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Login from '../Login/Login';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
     const token = sessionStorage.getItem('token');
@@ -68,8 +69,11 @@ function MainDashboard() {
 }
 
 function ReserveButton({allocation}){
-    const handleReserve=()=>{
-        console.log('Handle reserve');
+    const navigate = useNavigate();
+
+    const handleReserve=(event)=>{
+        console.log('Handle reserve ', allocation.id);
+        navigate('/allocation', { state: { id: allocation.id } });
     }
 
     if (allocation.owner == 1) {
