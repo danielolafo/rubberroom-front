@@ -35,6 +35,7 @@ function AllocationSite(allocationId){
         <div>
             <input type="text" disabled value={allocation.address} />
         </div>
+        <MediaData/>
         </>
     );
 }
@@ -73,31 +74,37 @@ function AllocationInfo(){
     );
 }
 
-function AllocationMedia(){
+function MediaData(){
 
-    const [allocation, setAllocation] = useState({
+    const [mediaData, setMediaData] = useState({
         id:   '',
-        city:  '',
-        address: ''
+        insert_date:  '',
+        state: '',
+        content: '',
+        allocation_id: null
     });
 
-    const getAllocationMedia = async () => {
-        axios.get("http://localhost:8000/media-data/"+0, [])
+    const getMediaData = async () => {
+        axios.get("http://localhost:8000/media-data/"+22, [])
             .then((response) => {
-                setAllocation(response.data);
+                setMediaData(response.data[0]);
+                setMediaData((prevValues)=>({
+                    ...prevValues,
+                    content:'data:image/png;base64,'+response.data[0]['content']
+                }));
             }).catch(error => {
-                setAllocation(null);
+                setMediaData(null);
             });
     }
 
     useEffect(() => {
-        getAllocationMedia();
+        getMediaData();
     }, []);
 
     return(
         <>
             <div>
-                
+                <img src={mediaData.content}></img>
             </div>
         </>
     );

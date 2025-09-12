@@ -20,6 +20,7 @@ function Login(){
         event.preventDefault();
         
         if(formValues.username==defaultUsername && formValues.password==defaultPassword){
+            console.log('Moving to /');
             sessionStorage.setItem('token', defaultToken);
             navigate('/');
         }
